@@ -106,6 +106,24 @@ app.post('/updatehero/:id', (req, res) => {
     })
 })
 
+//根据ID信息删除对应英雄
+app.get('/deletehero/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = 'delete from heros where id=?';
+    conn.query(sql, id, (err, result) => {
+        if (err) return res.send({
+            status: 500,
+            msg: err.message,
+            data: null
+        })
+        res.send({
+            status: 200,
+            msg: 'ok',
+            data: null
+        })
+    })
+})
+
 
 // 让 后端项目，运行在 5001 端口
 app.listen(5001, () => {
