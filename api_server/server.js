@@ -73,7 +73,7 @@ app.post('/addhero', (req, res) => {
 app.get('/gethero/:id', (req, res) => {
     const id = req.params.id;
     const sql = 'select * from heros where id=?';
-    conn.query(sql,id,(err,result) => {
+    conn.query(sql, id, (err, result) => {
         if (err) return res.send({
             status: 500,
             msg: err.message,
@@ -86,6 +86,26 @@ app.get('/gethero/:id', (req, res) => {
         })
     })
 })
+
+//根据ID更新对应的英雄信息
+app.post('/updatehero/:id', (req, res) => {
+    const id = req.params.id;
+    const newInfo = req.body;
+    const sql = 'update heros set ? where id=?';
+    conn.query(sql, [newInfo, id], (err, result) => {
+        if (err) return res.send({
+            status: 500,
+            msg: err.message,
+            data: null
+        })
+        res.send({
+            status: 200,
+            msg: 'ok',
+            data: null
+        })
+    })
+})
+
 
 // 让 后端项目，运行在 5001 端口
 app.listen(5001, () => {
