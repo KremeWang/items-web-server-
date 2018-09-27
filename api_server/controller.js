@@ -1,12 +1,5 @@
 //封装业务逻辑处理模块
-const mysql = require('mysql');
-//连接数据库
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'hero'
-})
+const conn = require('./db.js');
 
 module.exports = {
     testAPI: (req, res) => {
